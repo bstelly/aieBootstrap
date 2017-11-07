@@ -98,7 +98,7 @@ void Application2D::draw() {
 	m_2dRenderer->setRenderColour(0, 1, 0, 1);
 	m_2dRenderer->drawBox(mPx, mPy, 100, 100, m_timer);
 	m_2dRenderer->setRenderColour(1, 0, 0, 1);
-	m_2dRenderer->drawBox(mPx, mPy, 90, 90, m_timer * 40);
+	m_2dRenderer->drawBox(mPx, mPy, 90, 90, m_timer * 3);
 	m_2dRenderer->setRenderColour(0, 0, 1, 1);
 	m_2dRenderer->drawBox(mPx, mPy, 100, 100, m_timer * 2);
 	
