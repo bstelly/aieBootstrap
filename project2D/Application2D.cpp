@@ -46,20 +46,42 @@ void Application2D::update(float deltaTime) {
 
 	// use arrow keys to move camera
 	if (input->isKeyDown(aie::INPUT_KEY_W))
-		mPy += 250.0f * deltaTime;
+		mPy += 1550.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_S))
-		mPy -= 250.0f * deltaTime;
+		mPy -= 1550.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_A))
-		mPx -= 250.0f * deltaTime;
+		mPx -= 1550.0f * deltaTime;
 
 	if (input->isKeyDown(aie::INPUT_KEY_D))
-		mPx += 250.0f * deltaTime;
+		mPx += 1550.0f * deltaTime;
+
+	//if (input->isKeyDown(aie::INPUT_KEY_SPACE)
+	//	//SHOOT PROJECTILE
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
+
+	// stops player from going off of the screen
+	if (mPx > 1280 - 15)
+	{
+		mPx = 1280 - 15;
+	}
+	if ((mPx - 15) < 0)
+	{
+		mPx = 15;
+	}
+	if (mPy > 720 - 15)
+	{
+		mPy = 720 - 15;
+	}
+	if ((mPy - 15) < 0)
+	{
+		mPy = 15;
+	}
+
 }
 
 void Application2D::draw() {
@@ -73,10 +95,11 @@ void Application2D::draw() {
 	// begin drawing sprites
 	m_2dRenderer->begin();
 
-
-
-	PacGuy pacGuy(mPx, mPy, 20);
-	
+	PacGuy pacGuy(mPx, mPy);
+	if (pacGuy.GetX() == 500 && pacGuy.GetY() == 600)
+	{
+		quit();
+	}
 	m_2dRenderer->setRenderColour(1, 1, 0, 1);
 	m_2dRenderer->drawCircle(mPx, mPy, 15);
 
