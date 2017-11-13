@@ -24,4 +24,3 @@ public:
 	friend istream & operator >> (istream &in, Vector4 vector);
 
 };
-

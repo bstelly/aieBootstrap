@@ -1,9 +1,8 @@
 #include "PacGuy.h"
 
-PacGuy::PacGuy(float xPos, float yPos)
-{
-	mPx = xPos;
-	mPy = yPos;
+PacGuy::PacGuy()
+{	
+	mPosition = new Vector2(15, 15);
 	mLives = 3;
 	mProjectiles = 0;
 }
@@ -34,15 +33,34 @@ int PacGuy::CheckProjectiles()	//return 1 if projectiles > 0, return 0 if projec
 
 float PacGuy::GetX()
 {
-	return mPx;
+	return mPosition->mX;
 }
 
 float PacGuy::GetY()
 {
-	return mPy;
+	return mPosition->mY;
 }
 
-void PacGuy::ChangeX(float newX)
+void PacGuy::ChangeX(float x)
 {
-	mPx = newX;
+	mPosition->mX = x;
+}
+
+void PacGuy::ChangeY(float y)
+{
+	mPosition->mY = y;
+}
+
+void PacGuy::ChangePos(Vector2 &other)
+{
+	mPosition->mX = mPosition->mX + other.mX;
+	mPosition->mY = mPosition->mY + other.mY;
+}
+
+Vector2 PacGuy::GetPos()
+{	
+	Vector2* temp = new Vector2;
+	temp->mX = mPosition->mX;
+	temp->mY = mPosition->mY;
+	return *temp;
 }
