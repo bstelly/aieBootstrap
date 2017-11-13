@@ -42,14 +42,28 @@ void Application2D::shutdown() {
 
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
-	Vector2 moveUp(0, (1000 * deltaTime));
-	Vector2 moveDown(0, (-1000 * deltaTime));
-	Vector2 moveLeft((-1000 * deltaTime), 0);
-	Vector2 moveRight((1000 * deltaTime), 0);
+	int iter = 0;
+	Vector2 moveUp(0, (500 * deltaTime));
+	Vector2 moveDown(0, (-500 * deltaTime));
+	Vector2 moveLeft((-500 * deltaTime), 0);
+	Vector2 moveRight((500 * deltaTime), 0);
 	Vector2 hitVerticalWall(-5, 0);
+
 
 	mVerticalWall[0].SetPosition(640, 360);
 	mVerticalWall[1].SetPosition(500, 500);
+
+	//First Vertical Wall
+	//iter = 0;
+	//while (iter < 322)
+	//{
+	//	for (int i = 320; i < 641; i++)
+	//	{
+	//		mVerticalWall[iter].SetX(360);
+	//		mVerticalWall[iter].SetY(i);
+	//		iter++;
+	//	}
+	//}
 
 	// input example
 	aie::Input* input = aie::Input::getInstance();
@@ -92,25 +106,21 @@ void Application2D::update(float deltaTime) {
 		mPlayer->ChangeY(30);
 	}
 
-	//Check to see if player is trying to pass over Vertical Wall
-	
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	if (mPlayer->GetPos() == mVerticalWall[i].GetPosition());
-	//	{
-	//		std::cout << "Hit a wall" << std::endl;
-	//		/*mPlayer->ChangePos(hitVerticalWall);*/
-	//	}
-	//	
-	//}
-	bool ans;
-	if (mPlayer->GetPos() == mVerticalWall[0].GetPosition())
+	//Check to see if player is trying to pass over Vertical Wall 
+	for (int i = 0; i < 3; i++)
 	{
-		ans = true;
-	}
-	else
-	{
-	ans = false;
+		if ((mPlayer->GetY() <= (mVerticalWall[i].GetY() + 50) && 
+			(mPlayer->GetX() + 15) == (mVerticalWall[i].GetX() - 5)) ||
+			(mPlayer->GetY() >= (mVerticalWall[i].GetY() - 50) && 
+			(mPlayer->GetX() + 15) == (mVerticalWall[i].GetX() - 5)))
+		{
+			std::cout << "Hit a wall" << std::endl;
+			mPlayer->ChangePos(hitVerticalWall);
+		}
+		else
+		{
+			break;
+		}
 	}
 }
 

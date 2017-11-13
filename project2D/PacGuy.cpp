@@ -2,7 +2,7 @@
 
 PacGuy::PacGuy()
 {	
-	mPosition = new Vector2(15, 15);
+	mPosition = new Vector2(15, 360);
 	mLives = 3;
 	mProjectiles = 0;
 }
@@ -64,3 +64,4 @@ Vector2 PacGuy::GetPos()
 	temp->mY = mPosition->mY;
 	return *temp;
 }
+

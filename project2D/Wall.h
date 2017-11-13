@@ -12,4 +12,6 @@ public:
 	Vector2 GetPosition();
 	float GetX();
 	float GetY();
+	void SetX(float x);
+	void SetY(float y);
 };

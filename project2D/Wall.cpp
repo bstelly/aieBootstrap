@@ -25,3 +25,13 @@ float Wall::GetY()
 {
 	return mPosition->mY;
 }
+
+void Wall::SetX(float x)
+{
+	mPosition->mX = x;
+}
+
+void Wall::SetY(float y)
+{
+	mPosition->mY = y;
+}
