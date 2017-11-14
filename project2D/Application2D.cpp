@@ -49,27 +49,16 @@ void Application2D::update(float deltaTime) {
 	Vector2 moveRight((400 * deltaTime), 0);
 
 	//Vertical Walls
+	mVerticalWall[0].SetPosition(110, 105);
+	mVerticalWall[1].SetPosition(150, 105);
 
 	//Horizontal Walls
-	mHorizontalWall[0].SetPosition(30, 30);
-
-	//Vertical Wall Corners
-	Vector2 verticalWallCorners[4];
-	verticalWallCorners[0] = { (mVerticalWall->GetX() + 5), (mVerticalWall->GetY() + 50) };
-	verticalWallCorners[1] = { (mVerticalWall->GetX() - 5), (mVerticalWall->GetY() + 50) };
-	verticalWallCorners[2] = { (mVerticalWall->GetX() + 5), (mVerticalWall->GetY() - 50) };
-	verticalWallCorners[3] = { (mVerticalWall->GetX() - 5), (mVerticalWall->GetY() - 50) };
-
-	//Player boundaries
-	Vector2 playerBoundaries[4];
-	playerBoundaries[0] = { (mPlayer->GetX() + 15), (mPlayer->GetY() + 15) };
-	playerBoundaries[1] = { (mPlayer->GetX() + 15), (mPlayer->GetY() - 15) };
-	playerBoundaries[2] = { (mPlayer->GetX() - 15), (mPlayer->GetY() + 15) };
-	playerBoundaries[3] = { (mPlayer->GetX() - 15), (mPlayer->GetY() - 15) };
+	mHorizontalWall[0].SetPosition(45, 45);
 
 
-	int facingVertWall;
-	int facingHorzWall;
+
+	int facingVertWall = 0;
+	int facingHorzWall = 0;
 	int wall;
 	bool hitVertWall;
 	bool hitHorzWall;
@@ -197,18 +186,28 @@ void Application2D::draw() {
 	m_2dRenderer->setRenderColour(1, 1, 0, 1);
 	m_2dRenderer->drawCircle(mPlayer->GetX(), mPlayer->GetY(), 15);
 
-	//Vertical Walls		width: 10  ,  height: 100
+	
+	
+	
+	//Boundary Walls		width: 10  ,  height: 100
 	m_2dRenderer->setRenderColour(0, 0, 1, 1);
 	m_2dRenderer->drawBox(640, 0, 1280, 30);
 	m_2dRenderer->drawBox(0, 360, 30, 720);
 	m_2dRenderer->drawBox(640, 720, 1280, 30);
 	m_2dRenderer->drawBox(1280, 360, 30, 720);
+	
+	//Vertical Walls		width: 10  ,  height: 100
+	m_2dRenderer->drawBox(110, 105, 10, 100);
+	m_2dRenderer->drawBox(150, 105, 10, 100);
+	
+	
+	
+	//Horizontal Walls		width: 100  , height: 10
+	m_2dRenderer->drawBox(65, 50, 100, 10);
 
-	
-	
-	
-	//Horizontal Walls
-	m_2dRenderer->drawBox(16, 16, 100, 10);
+
+
+
 
 
 	// //output some text, uses the last used colour
