@@ -2,32 +2,32 @@
 
 PacGuy::PacGuy()
 {	
-	mPosition = new Vector2(15, 360);
+	mPosition = new Vector2(15, 15);
 	mLives = 3;
 	mProjectiles = 0;
 }
 
-int PacGuy::CheckLives()		//return 1 if lives > 0,  return 0 if lives = 0
+bool PacGuy::CheckLives()
 {
 	if (mLives > 0)
 	{
-		return 1;
+		return true;
 	}
 	else
 	{
-		return 0;
+		return false;
 	}
 }
 
-int PacGuy::CheckProjectiles()	//return 1 if projectiles > 0, return 0 if projectiles = 0
+bool PacGuy::CheckProjectiles()
 {
 	if (mProjectiles == 0)
 	{
-		return 0;
+		return true;
 	}
 	else
 	{
-		return 1;
+		return false;
 	}
 }
 

@@ -9,13 +9,12 @@ private:
 	int mProjectiles;
 public:
 	PacGuy();
-	int CheckLives();
-	int CheckProjectiles();
+	bool CheckLives();
+	bool CheckProjectiles();
 	float GetX();
 	float GetY();
 	void ChangeX(float x);
 	void ChangeY(float y);
 	void ChangePos(Vector2 &other);
 	Vector2 GetPos();
-	int CheckForWall();
 };
