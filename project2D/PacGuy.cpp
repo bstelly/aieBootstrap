@@ -2,7 +2,7 @@
 
 PacGuy::PacGuy()
 {	
-	mPosition = new Vector2(15, 15);
+	mPosition = new Vector2(0, 0);
 	mLives = 3;
 	mProjectiles = 0;
 }
@@ -21,7 +21,7 @@ bool PacGuy::CheckLives()
 
 bool PacGuy::CheckProjectiles()
 {
-	if (mProjectiles == 0)
+	if (mProjectiles > 0)
 	{
 		return true;
 	}
@@ -29,6 +29,11 @@ bool PacGuy::CheckProjectiles()
 	{
 		return false;
 	}
+}
+
+void PacGuy::AddProjectile()
+{
+	mProjectiles = mProjectiles + 1;
 }
 
 float PacGuy::GetX()

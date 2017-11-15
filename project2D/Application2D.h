@@ -3,6 +3,9 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "PacGuy.h"
+#include "Wall.h"
+#include "Enemy.h"
+#include "Item.h"
 
 class Application2D : public aie::Application {
 public:
@@ -29,4 +32,7 @@ protected:
 	PacGuy* mPlayer;
 	Wall* mVerticalWall;
 	Wall* mHorizontalWall;
+	Enemy* mEnemy;
+	Item* mPellet;
+	Item* mPowerPellet;
 };
