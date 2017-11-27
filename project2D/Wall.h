@@ -8,7 +8,7 @@ private:
 
 public:
 	Wall();
-	void SetPosition(float x, float y);
+	void SetPosition(int x, int y);
 	Vector2 GetPosition();
 	float GetX();
 	float GetY();

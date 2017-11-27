@@ -46,12 +46,12 @@ float PacGuy::GetY()
 	return mPosition->mY;
 }
 
-void PacGuy::ChangeX(float x)
+void PacGuy::ChangeX(int x)
 {
 	mPosition->mX = x;
 }
 
-void PacGuy::ChangeY(float y)
+void PacGuy::ChangeY(int y)
 {
 	mPosition->mY = y;
 }

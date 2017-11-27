@@ -46,13 +46,15 @@ void Application2D::shutdown() {
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 	int iter = 0;
-	Vector2 moveUp(0, (100 * deltaTime));
-	Vector2 moveDown(0, (-100 * deltaTime));
-	Vector2 moveLeft((-100 * deltaTime), 0);
-	Vector2 moveRight((100 * deltaTime), 0);
-
-	//Enemies
-
+	Vector2 moveUp(0, (160 * deltaTime));
+	Vector2 moveDown(0, (-160 * deltaTime));
+	Vector2 moveLeft((-160 * deltaTime), 0);
+	Vector2 moveRight((160 * deltaTime), 0);
+	Vector2 hitWallGoingUp(0, -1);
+	Vector2 hitWallGoingDown(0, 1);
+	Vector2 hitWallGoingLeft(1, 0);
+	Vector2 hitWallGoingRight(-1, 0);
+	
 	//Vertical Walls
 	mVerticalWall[0].SetPosition(110, 105);
 	mVerticalWall[1].SetPosition(150, 105);
@@ -61,26 +63,27 @@ void Application2D::update(float deltaTime) {
 	//Horizontal Walls
 	mHorizontalWall[0].SetPosition(65, 500);
 	mHorizontalWall[1].SetPosition(500, 500);
-	mHorizontalWall[2].SetPosition(450, 500);
-	mHorizontalWall[3].SetPosition(400, 500);
-	mHorizontalWall[4].SetPosition(350, 500);
 
+	//Enemies
+	mEnemy[0].SetPosition(400, 400, 2);
+	mEnemy[1].SetPosition(300, 300, 1);
 
 	//Enemy movement
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		if ((mEnemy->GetX() + 25) >= mVerticalWall[i].GetX() &&
-			(mEnemy->GetX() - 25) <= mVerticalWall[i].GetX())
+
+
+		if ((mEnemy[i].GetX() + 25) >= mVerticalWall[i].GetX() &&
+			(mEnemy[i].GetX() - 25) <= mVerticalWall[i].GetX())
 		{
-			if ((mEnemy->GetY() + 20) >= (mVerticalWall[i].GetY() - 50) &&
-				(mEnemy->GetY() - 20) <= (mVerticalWall[i].GetY() + 50))
+			if ((mEnemy[i].GetY() + 20) >= (mVerticalWall[i].GetY() - 50) &&
+				(mEnemy[i].GetY() - 20) <= (mVerticalWall[i].GetY() + 50))
 			{
 
 				break;
 			}
 		}
-
-
+	}
 
 		int facingVertWall = 0;
 		int facingHorzWall = 0;
@@ -99,7 +102,6 @@ void Application2D::update(float deltaTime) {
 				if ((mPlayer->GetY() + 20) >= (mVerticalWall[i].GetY() - 50) &&
 					(mPlayer->GetY() - 20) <= (mVerticalWall[i].GetY() + 50))
 				{
-					std::cout << "You hit a vertical wall" << std::endl;
 					hitVertWall = true;
 					vertWall = i;
 					break;
@@ -120,34 +122,37 @@ void Application2D::update(float deltaTime) {
 				if ((mPlayer->GetX() + 15) >= (mHorizontalWall[i].GetX() - 50) &&
 					(mPlayer->GetX() - 15) <= (mHorizontalWall[i].GetX() + 50))
 				{
-					std::cout << "you hit a horizontal wall" << std::endl;
 					hitHorzWall = true;
 					horzWall = i;
 					break;
 				}
-			}
 			else
 			{
 				hitHorzWall = false;
 			}
 		}
+		
 		if (hitVertWall == true)
 		{
 			if (mPlayer->GetX() <= mVerticalWall[vertWall].GetX())
 			{
 				facingVertWall = 1;		//Can't move RIGHT
+				mPlayer->ChangePos(hitWallGoingRight);
 			}
 			else if (mPlayer->GetX() >= mVerticalWall[vertWall].GetX())
 			{
 				facingVertWall = 2;		//Can't move LEFT
+				mPlayer->ChangePos(hitWallGoingLeft);
 			}
-			if (mPlayer->GetY() <= mVerticalWall[vertWall].GetY())
+			if ((mPlayer->GetY() + 15) == (mVerticalWall[vertWall].GetY() + 50))
 			{
 				facingVertWallCorner = 3;		//Can't move UP
+				mPlayer->ChangePos(hitWallGoingUp);
 			}
-			else if (mPlayer->GetY() >= mVerticalWall[vertWall].GetY())
+			else if ((mPlayer->GetY() + 15) == (mVerticalWall[vertWall].GetY() - 50))
 			{
 				facingVertWallCorner = 4;		//Can't move DOWN
+				mPlayer->ChangePos(hitWallGoingDown);
 			}
 		}
 
@@ -156,18 +161,22 @@ void Application2D::update(float deltaTime) {
 			if (mPlayer->GetY() <= mHorizontalWall[horzWall].GetY())
 			{
 				facingHorzWall = 3;		//Can't move UP
+				mPlayer->ChangePos(hitWallGoingUp);
 			}
 			else if (mPlayer->GetY() >= mHorizontalWall[horzWall].GetY())
 			{
 				facingHorzWall = 4;		//Can't move DOWN
+				mPlayer->ChangePos(hitWallGoingDown);
 			}
-			if ((mPlayer->GetX() + 15) == (mHorizontalWall[horzWall].GetX() - 50))		//Can't be equal to because x won't equal 
-			{																			// the same as the number in condition
+			if ((mPlayer->GetX() + 15) == (mHorizontalWall[horzWall].GetX() - 50))
+			{
 				facingHorzWallCorner = 1;		//Can't move RIGHT
+				mPlayer->ChangePos(hitWallGoingRight);
 			}
 			else if ((mPlayer->GetX() - 15) == (mHorizontalWall[horzWall].GetX() + 50))
 			{
 				facingHorzWallCorner = 2;		//Can't move LEFT
+				mPlayer->ChangePos(hitWallGoingLeft);
 			}
 		}
 
@@ -198,7 +207,7 @@ void Application2D::update(float deltaTime) {
 			quit();
 
 
-		// Walls that prevent the player from moving off screen
+		// Walls that prevent the player and enemies from moving off screen
 		if (mPlayer->GetX() > 1280 - 30)
 		{
 			mPlayer->ChangeX(1280 - 30);
@@ -215,6 +224,7 @@ void Application2D::update(float deltaTime) {
 		{
 			mPlayer->ChangeY(30);
 		}
+
 
 	}
 }
@@ -237,7 +247,8 @@ void Application2D::draw() {
 
 	//Enemies
 	m_2dRenderer->setRenderColour(0, 1, 0, 1);
-	m_2dRenderer->drawCircle(mEnemy->GetX(), mEnemy->GetY(), 10);
+	m_2dRenderer->drawCircle(mEnemy[0].GetX(), mEnemy[0].GetY(), 10);
+	m_2dRenderer->drawCircle(mEnemy[1].GetX(), mEnemy[1].GetY(), 10);
 	
 	
 	//Boundary Walls		width: 10  ,  height: 100
@@ -256,9 +267,7 @@ void Application2D::draw() {
 	//Horizontal Walls		width: 100  , height: 10
 	m_2dRenderer->drawBox(65, 500, 100, 10);
 	m_2dRenderer->drawBox(500, 500, 100, 10);
-	m_2dRenderer->drawBox(450, 500, 100, 10);
-	m_2dRenderer->drawBox(400, 500, 100, 10);
-	m_2dRenderer->drawBox(350, 500, 100, 10);
+
 
 
 

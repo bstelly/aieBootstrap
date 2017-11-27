@@ -13,8 +13,8 @@ public:
 	bool CheckProjectiles();
 	float GetX();
 	float GetY();
-	void ChangeX(float x);
-	void ChangeY(float y);
+	void ChangeX(int x);
+	void ChangeY(int y);
 	void ChangePos(Vector2 &other);
 	Vector2 GetPos();
 	void AddProjectile();

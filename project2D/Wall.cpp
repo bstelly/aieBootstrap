@@ -5,7 +5,7 @@ Wall::Wall()
 	mPosition = new Vector2();
 }
 
-void Wall::SetPosition(float x, float y)
+void Wall::SetPosition(int x, int y)
 {
 	Vector2 position(x, y);
 	*mPosition = position;
