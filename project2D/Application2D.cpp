@@ -46,10 +46,10 @@ void Application2D::shutdown() {
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 	int iter = 0;
-	Vector2 moveUp(0, (10 * deltaTime));
-	Vector2 moveDown(0, (-10 * deltaTime));
-	Vector2 moveLeft((-10 * deltaTime), 0);
-	Vector2 moveRight((10 * deltaTime), 0);
+	Vector2 moveUp(0, (100 * deltaTime));
+	Vector2 moveDown(0, (-100 * deltaTime));
+	Vector2 moveLeft((-100 * deltaTime), 0);
+	Vector2 moveRight((100 * deltaTime), 0);
 
 	//Enemies
 
