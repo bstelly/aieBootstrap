@@ -5,6 +5,7 @@ Enemy::Enemy()
 {
 	mPosition = new Vector2;
 	mDirection;
+	mSpeed;
 }
 
 int Enemy::GetDirection()
@@ -12,22 +13,12 @@ int Enemy::GetDirection()
 	return mDirection;
 }
 
-void Enemy::SetPosition(int x, int y, int dir)
+void Enemy::SetPosition(int x, int y, int direction, int speed)
 {
 	mPosition->mX = x;
 	mPosition->mY = y;
-	mDirection = dir;		//0 is left, 1 is right, 2 is up, 3 is down
-}
-
-void Enemy::ChangeDirection(int dir)
-{
-	srand(time(NULL));
-	int randNum = rand() % 3;
-	while (randNum == dir)
-	{
-		randNum = rand() % 3;
-	}
-	mDirection = randNum;
+	mDirection = direction;		//1 is left, 2 is right, 3 is up, 4 is down
+	mSpeed = speed;
 }
 
 float Enemy::GetX()
@@ -69,5 +60,35 @@ void Enemy::ChangeX(int x)
 void Enemy::ChangeY(int y)
 {
 	mPosition->mY = y;
+}
+
+void Enemy::Move()
+{
+	Vector2 moveLeft(-(mSpeed), 0);
+	Vector2 moveRight(mSpeed, 0);
+	Vector2 moveUp(0, mSpeed);
+	Vector2 moveDown(0, -(mSpeed));
+
+	if (mDirection == 1)
+	{
+		*mPosition = *mPosition + moveLeft;
+	}
+	if (mDirection == 2)
+	{
+		*mPosition = *mPosition + moveRight;
+	}
+	if (mDirection == 3)
+	{
+		*mPosition = *mPosition + moveUp;
+	}
+	if (mDirection == 4)
+	{
+		*mPosition = *mPosition + moveDown;
+	}
+}
+
+void Enemy::ChangeDirection(int num)
+{
+	mDirection = num;
 }
 

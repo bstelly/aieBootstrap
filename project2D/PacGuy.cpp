@@ -70,3 +70,7 @@ Vector2 PacGuy::GetPos()
 	return *temp;
 }
 
+void PacGuy::LoseALife()
+{
+	mLives = mLives - 1;
+}

@@ -6,10 +6,11 @@ class Enemy
 private:
 	Vector2* mPosition;
 	int mDirection;
+	int mSpeed;
 	
 public:
 	Enemy();
-	void SetPosition(int x, int y, int dir);
+	void SetPosition(int x, int y, int direction, int speed);
 	float GetX();
 	float GetY();
 	void ChangePos(Vector2 &other);
@@ -19,5 +20,6 @@ public:
 	void ChangeY(int y);
 	Vector2 GetPos();
 	int GetDirection();
-	void ChangeDirection(int direction);
+	void ChangeDirection(int num);
+	void Move();
 };

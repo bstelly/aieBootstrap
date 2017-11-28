@@ -18,4 +18,5 @@ public:
 	void ChangePos(Vector2 &other);
 	Vector2 GetPos();
 	void AddProjectile();
+	void LoseALife();
 };

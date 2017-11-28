@@ -32,6 +32,12 @@ bool Application2D::startup() {
 	mEnemy = new Enemy[1280 * 720];
 	mPellet = new Item[1280 * 720];
 	mPowerPellet = new Item[1280 * 720];
+	
+	
+	//Enemeis
+	mEnemy[0].SetPosition(400, 400, 2, 30);
+	mEnemy[1].SetPosition(300, 300, 1, 10);
+	mEnemy[2].SetPosition(400, 400, 3, 1);
 	return true;
 }
 
@@ -58,33 +64,80 @@ void Application2D::update(float deltaTime) {
 	//Vertical Walls
 	mVerticalWall[0].SetPosition(110, 105);
 	mVerticalWall[1].SetPosition(150, 105);
+	mVerticalWall[2].SetPosition(400, 300);
+	mVerticalWall[3].SetPosition(1100, 400);
 
 
 	//Horizontal Walls
 	mHorizontalWall[0].SetPosition(65, 500);
 	mHorizontalWall[1].SetPosition(500, 500);
 
-	//Enemies
-	mEnemy[0].SetPosition(400, 400, 2);
-	mEnemy[1].SetPosition(300, 300, 1);
-
 	//Enemy movement
-	for (int i = 0; i < 2; i++)
+	for (int iter = 0; iter < 3; iter++)
 	{
-
-
-		if ((mEnemy[i].GetX() + 25) >= mVerticalWall[i].GetX() &&
-			(mEnemy[i].GetX() - 25) <= mVerticalWall[i].GetX())
+		mEnemy[iter].Move();
+	}
+	
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 10; j++)
 		{
-			if ((mEnemy[i].GetY() + 20) >= (mVerticalWall[i].GetY() - 50) &&
-				(mEnemy[i].GetY() - 20) <= (mVerticalWall[i].GetY() + 50))
+			if ((mEnemy[i].GetX() + 25) >= mVerticalWall[j].GetX() &&
+				(mEnemy[i].GetX() - 25) <= mVerticalWall[j].GetX())
 			{
-
-				break;
+				if ((mEnemy[i].GetY() + 20) >= (mVerticalWall[j].GetY() - 50) &&
+					(mEnemy[i].GetY() - 20) <= (mVerticalWall[j].GetY() + 50))
+				{
+					if (mEnemy[i].GetDirection() == 1)
+					{
+						mEnemy[i].ChangeDirection(2);
+					}
+					else if (mEnemy[i].GetDirection() == 2)
+					{
+						mEnemy[i].ChangeDirection(1);
+					}
+					else if (mEnemy[i].GetDirection() == 3)
+					{
+						mEnemy[i].ChangeDirection(4);
+					}
+					else if (mEnemy[i].GetDirection() == 4)
+					{
+						mEnemy[i].ChangeDirection(3);
+					}
+				}
 			}
 		}
 	}
 
+	//Check if enemy hits player
+	int playerLeftSide = mPlayer->GetX() - 15;
+	int playerRightSide = mPlayer->GetX() + 15;
+	int playerTop = mPlayer->GetY() + 15;
+	int playerBottom = mPlayer->GetY() - 15;
+	
+	for (int i = 0; i < 3; i++)
+	{
+		if ((mEnemy[i].GetX() + 10) >= playerLeftSide &&
+			(mEnemy[i].GetX() - 10) <= playerRightSide)
+		{
+			if ((mEnemy[i].GetY() + 10) >= playerTop &&
+				(mEnemy[i].GetY() - 10) <= playerBottom)
+			{
+				std::cout << "enemy hit player" << std::endl;
+				mPlayer->LoseALife();
+				mPlayer->ChangeX(0);
+				mPlayer->ChangeY(0);
+			}
+		}
+	}
+
+	//Lose Condition
+	if (mPlayer->CheckLives() == false)
+	{
+		quit();
+	}
+		
+		//Checking if player hit a wall
 		int facingVertWall = 0;
 		int facingHorzWall = 0;
 		int facingVertWallCorner = 0;
@@ -93,6 +146,7 @@ void Application2D::update(float deltaTime) {
 		int vertWall;
 		bool hitVertWall;
 		bool hitHorzWall;
+		
 		//Check for vertical wall for player
 		for (int i = 0; i < 10; i++)
 		{
@@ -126,6 +180,7 @@ void Application2D::update(float deltaTime) {
 					horzWall = i;
 					break;
 				}
+			}
 			else
 			{
 				hitHorzWall = false;
@@ -224,10 +279,30 @@ void Application2D::update(float deltaTime) {
 		{
 			mPlayer->ChangeY(30);
 		}
+		for (int i = 0; i < 10; i++)
+		{
+			if (mEnemy[i].GetX() > 1280 - 25)
+			{
+				mEnemy[i].ChangeDirection(1);
+			}
+			if ((mEnemy[i].GetX() - 25) < 0)
+			{
+				mEnemy[i].ChangeDirection(2);
+			}
+			if (mEnemy[i].GetY() > 720 - 25)
+			{
+				mEnemy[i].ChangeDirection(4);
+			}
+			if ((mEnemy[i].GetY() - 25) < 0)
+			{
+				mEnemy[i].ChangeDirection(3);
+			}
+		}
 
 
 	}
-}
+
+
 
 void Application2D::draw() {
 	
@@ -249,6 +324,7 @@ void Application2D::draw() {
 	m_2dRenderer->setRenderColour(0, 1, 0, 1);
 	m_2dRenderer->drawCircle(mEnemy[0].GetX(), mEnemy[0].GetY(), 10);
 	m_2dRenderer->drawCircle(mEnemy[1].GetX(), mEnemy[1].GetY(), 10);
+	m_2dRenderer->drawCircle(mEnemy[2].GetX(), mEnemy[2].GetY(), 10);
 	
 	
 	//Boundary Walls		width: 10  ,  height: 100
@@ -258,16 +334,17 @@ void Application2D::draw() {
 	m_2dRenderer->drawBox(640, 720, 1280, 30);
 	m_2dRenderer->drawBox(1280, 360, 30, 720);
 	
-	//Vertical Walls		width: 10  ,  height: 100
-	m_2dRenderer->drawBox(110, 105, 10, 100);
-	m_2dRenderer->drawBox(150, 105, 10, 100);
-	
-	
-	
-	//Horizontal Walls		width: 100  , height: 10
-	m_2dRenderer->drawBox(65, 500, 100, 10);
-	m_2dRenderer->drawBox(500, 500, 100, 10);
+	//Vertical Walls		width: 20  ,  height: 100
+	m_2dRenderer->drawBox(110, 105, 20, 100);
+	m_2dRenderer->drawBox(150, 105, 20, 100);
+	m_2dRenderer->drawBox(400, 300, 20, 100);
+	m_2dRenderer->drawBox(1100, 400, 20, 100);
 
+	
+	
+	//Horizontal Walls		width: 100  , height: 20
+	m_2dRenderer->drawBox(65, 500, 100, 20);
+	m_2dRenderer->drawBox(500, 500, 100, 20);
 
 
 
