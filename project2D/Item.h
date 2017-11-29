@@ -5,11 +5,14 @@ class Item
 {
 private:
 	Vector2* mPosition;
-	
+	bool mPickedUp;
 public:
 	Item();
-	Item(float x, float y);
+	void SetPosition(int x, int y);
 	Vector2 GetPosition();
-	float GetX();
-	float GetY();
+	int GetX();
+	int GetY();
+	bool Status();
+	void HasBeenPickedUp();
+
 };

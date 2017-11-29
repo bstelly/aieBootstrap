@@ -5,12 +5,12 @@ class Enemy
 {
 private:
 	Vector2* mPosition;
-	int mDirection;
+	Vector2* mVelocity; //Direction enemy is moving
 	int mSpeed;
 	
 public:
 	Enemy();
-	void SetPosition(int x, int y, int direction, int speed);
+	void SetPosition(int x, int y, Vector2 velo, int speed);
 	float GetX();
 	float GetY();
 	void ChangePos(Vector2 &other);
@@ -19,7 +19,8 @@ public:
 	void ChangeX(int x);
 	void ChangeY(int y);
 	Vector2 GetPos();
-	int GetDirection();
-	void ChangeDirection(int num);
+	void ChangeVelocity(Vector2 velo);
 	void Move();
+	Vector2 GetVelocity();
+	
 };

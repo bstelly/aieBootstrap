@@ -5,6 +5,7 @@ PacGuy::PacGuy()
 	mPosition = new Vector2(0, 0);
 	mLives = 3;
 	mProjectiles = 0;
+	mPellets = 0;
 }
 
 bool PacGuy::CheckLives()
@@ -73,4 +74,24 @@ Vector2 PacGuy::GetPos()
 void PacGuy::LoseALife()
 {
 	mLives = mLives - 1;
+}
+
+int PacGuy::NumLives()
+{
+	return mLives;
+}
+
+int PacGuy::NumProjectiles()
+{
+	return mProjectiles;
+}
+
+void PacGuy::PickUpPellet()
+{
+		mPellets = mPellets + 1;
+}
+
+int PacGuy::NumPellets()
+{
+	return mPellets;
 }
