@@ -346,9 +346,11 @@ void Application2D::draw() {
 		}
 
 	//Horizontal Walls		width: 100  , height: 20
-	m_2dRenderer->drawBox(65, 500, 100, 20);
-	m_2dRenderer->drawBox(500, 500, 100, 20);
-
+		for (int i = 0; i < 10; i++)
+		{
+			m_2dRenderer->drawBox(mHorizontalWall[i].GetX(), mHorizontalWall[i].GetY(), 100, 20);
+		}
+	
 	// //output some text, uses the last used colour
 	m_2dRenderer->setRenderColour(1, 1, 1, 1);
 	char lives[32];
