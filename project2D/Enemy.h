@@ -7,6 +7,7 @@ private:
 	Vector2* mPosition;
 	Vector2* mVelocity; //Direction enemy is moving
 	int mSpeed;
+	bool mIsDead;
 	
 public:
 	Enemy();
@@ -22,5 +23,6 @@ public:
 	void ChangeVelocity(Vector2 velo);
 	void Move();
 	Vector2 GetVelocity();
+	bool Status();
 	
 };

@@ -6,6 +6,7 @@ PacGuy::PacGuy()
 	mLives = 3;
 	mProjectiles = 0;
 	mPellets = 0;
+	mFacing;
 }
 
 bool PacGuy::CheckLives()
@@ -35,6 +36,11 @@ bool PacGuy::CheckProjectiles()
 void PacGuy::AddProjectile()
 {
 	mProjectiles = mProjectiles + 1;
+}
+
+void PacGuy::SubtractProjectile()
+{
+	mProjectiles = mProjectiles - 1;
 }
 
 float PacGuy::GetX()
@@ -94,4 +100,14 @@ void PacGuy::PickUpPellet()
 int PacGuy::NumPellets()
 {
 	return mPellets;
+}
+
+int PacGuy::Facing()
+{
+	return mFacing;
+}
+
+void PacGuy::ChangeDirection(int dir)
+{
+	mFacing = dir;
 }

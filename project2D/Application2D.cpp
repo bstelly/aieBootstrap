@@ -6,6 +6,8 @@
 #include "Wall.h"	
 #include <Vector2.h>
 #include <iostream>
+#include <winerror.h>
+
 Application2D::Application2D() {
 
 }
@@ -27,21 +29,35 @@ bool Application2D::startup() {
 	m_cameraY = 0;
 	m_timer = 0;
 	mPlayer = new PacGuy();
-	mVerticalWall = new Wall[1280 * 720];
-	mHorizontalWall = new Wall[1280 * 720];
+	mVertWall = new Wall[1280 * 720];
+	mHorzWall = new Wall[1280 * 720];
 	mEnemy = new Enemy[10];
 	mPellet = new Item[1280 * 720];
 	mPowerPellet = new Item[10];
+	mProjectile = new Projectile[10];
 	
 	
 	//Enemeis
 	mEnemy[0].SetPosition(400, 400, Vector2(1, 0), 30);
 	mEnemy[1].SetPosition(300, 300, Vector2(-1, 0), 10);
-	mEnemy[2].SetPosition(400, 400, Vector2(0, 1), 1);
+	mEnemy[2].SetPosition(400, 400, Vector2(0, 1), 5);
 
 	//Pellets
 	mPellet[0].SetPosition(1000, 650);
 	mPellet[1].SetPosition(300, 300);
+
+	//Power Pellets
+	mPowerPellet[0].SetPosition(500, 450);
+	mPowerPellet[1].SetPosition(550, 450);
+	mPowerPellet[2].SetPosition(580, 450);
+
+
+	//Projectiles
+	mProjectile[0].SetPosition(mPlayer->GetX(), mPlayer->GetY());
+	mProjectile[1].SetPosition(mPlayer->GetX(), mPlayer->GetY());
+	mProjectile[2].SetPosition(mPlayer->GetX(), mPlayer->GetY());
+
+
 	return true;
 }
 
@@ -57,15 +73,15 @@ void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
 	
 	//Vertical Walls
-	mVerticalWall[0].SetPosition(110, 105);
-	mVerticalWall[1].SetPosition(150, 105);
-	mVerticalWall[2].SetPosition(400, 300);
-	mVerticalWall[3].SetPosition(1100, 400);
+	mVertWall[0].SetPosition(110, 105);
+	mVertWall[1].SetPosition(150, 105);
+	mVertWall[2].SetPosition(400, 300);
+	mVertWall[3].SetPosition(1100, 400);
 
 
 	//Horizontal Walls
-	mHorizontalWall[0].SetPosition(65, 500);
-	mHorizontalWall[1].SetPosition(500, 500);
+	mHorzWall[0].SetPosition(65, 500);
+	mHorzWall[1].SetPosition(500, 500);
 
 	//Enemy movement
 	for (int iter = 0; iter < 3; iter++)
@@ -77,11 +93,11 @@ void Application2D::update(float deltaTime) {
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			if ((mEnemy[i].GetX() + 25) >= mVerticalWall[j].GetX() &&
-				(mEnemy[i].GetX() - 25) <= mVerticalWall[j].GetX())
+			if ((mEnemy[i].GetX() + 25) >= mVertWall[j].GetX() &&
+				(mEnemy[i].GetX() - 25) <= mVertWall[j].GetX())
 			{
-				if ((mEnemy[i].GetY() + 20) >= (mVerticalWall[j].GetY() - 50) &&
-					(mEnemy[i].GetY() - 20) <= (mVerticalWall[j].GetY() + 50))
+				if ((mEnemy[i].GetY() + 20) >= (mVertWall[j].GetY() - 50) &&
+					(mEnemy[i].GetY() - 20) <= (mVertWall[j].GetY() + 50))
 				{
 					mEnemy[i].ChangeVelocity(mEnemy[i].GetVelocity() * -1);
 				}
@@ -103,12 +119,57 @@ void Application2D::update(float deltaTime) {
 			if ((mEnemy[i].GetY() - 10) <= playerTop &&
 				(mEnemy[i].GetY() + 10) >= playerBottom)
 			{
-				mPlayer->LoseALife();
-				mPlayer->ChangeX(0);
-				mPlayer->ChangeY(0);
+				if (mEnemy[i].Status() == false)
+				{
+					mPlayer->LoseALife();
+					mPlayer->ChangeX(0);
+					mPlayer->ChangeY(0);
+				}
 			}
 		}
 	}
+
+
+
+	//Projectile Movement
+	for(int i = 0; i < 3; i++)
+	{
+		if(mProjectile[i].IsActive() == false)
+		{
+			mProjectile[i].SetPosition(mPlayer->GetX(), mPlayer->GetY());
+		}
+	}
+
+	for(int i = 0; i < 5; i++)
+	{
+		if (mProjectile[i].IsActive() == true)
+		{
+			if(mPlayer->Facing() == 1)
+			{
+				mProjectile[i].Move(1);
+			}
+			else if (mPlayer->Facing() == 2)
+			{
+				mProjectile[i].Move(2);
+			}
+			else if (mPlayer->Facing() == 3)
+			{
+				mProjectile[i].Move(3);
+			}
+			else if (mPlayer->Facing() == 4)
+			{
+				mProjectile[i].Move(4);
+			}
+		}
+	}
+	
+	/*if (mProjectile[currentProjectile].IsActive() == true)
+	{
+		if(facing == 1)
+		{
+			mProjectile[currentProjectile].Move(1);
+		}
+	}*/
 
 	//Lose Condition
 	if (mPlayer->CheckLives() == false)
@@ -138,6 +199,30 @@ void Application2D::update(float deltaTime) {
 		}
 	}
 
+	//Check if player hits a Power Pellet
+	for (int i = 0; i < 2; i++)
+	{
+		if ((mPowerPellet[i].GetX() + 8) >= playerLeftSide &&
+			(mPowerPellet[i].GetX() - 8) <= playerRightSide)
+		{
+			if ((mPowerPellet[i].GetY() - 8) <= playerTop &&
+				(mPowerPellet[i].GetY() + 8) >= playerBottom)
+			{
+				if (mPowerPellet[i].Status() == false)
+				{
+					mPlayer->AddProjectile();
+					mPowerPellet[i].HasBeenPickedUp();
+					mProjectile[i].HasBeenPickedUp();
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
+
+
 	//Win Condition
 	if (mPlayer->NumPellets() == 2)
 	{
@@ -158,11 +243,11 @@ void Application2D::update(float deltaTime) {
 		//Check for vertical wall for player
 		for (int i = 0; i < 10; i++)
 		{
-			if ((mPlayer->GetX() + 25) >= mVerticalWall[i].GetX() &&
-				(mPlayer->GetX() - 25) <= mVerticalWall[i].GetX())
+			if ((mPlayer->GetX() + 25) >= mVertWall[i].GetX() &&
+				(mPlayer->GetX() - 25) <= mVertWall[i].GetX())
 			{
-				if ((mPlayer->GetY() + 20) >= (mVerticalWall[i].GetY() - 50) &&
-					(mPlayer->GetY() - 20) <= (mVerticalWall[i].GetY() + 50))
+				if ((mPlayer->GetY() + 20) >= (mVertWall[i].GetY() - 50) &&
+					(mPlayer->GetY() - 20) <= (mVertWall[i].GetY() + 50))
 				{
 					hitVertWall = true;
 					vertWall = i;
@@ -178,11 +263,11 @@ void Application2D::update(float deltaTime) {
 		//Checks for Horizontal Wall for player
 		for (int i = 0; i < 10; i++)
 		{
-			if ((mPlayer->GetY() + 15) >= (mHorizontalWall[i].GetY() - 10) &&
-				(mPlayer->GetY() - 15) <= (mHorizontalWall[i].GetY() + 10))
+			if ((mPlayer->GetY() + 15) >= (mHorzWall[i].GetY() - 10) &&
+				(mPlayer->GetY() - 15) <= (mHorzWall[i].GetY() + 10))
 			{
-				if ((mPlayer->GetX() + 15) >= (mHorizontalWall[i].GetX() - 50) &&
-					(mPlayer->GetX() - 15) <= (mHorizontalWall[i].GetX() + 50))
+				if ((mPlayer->GetX() + 15) >= (mHorzWall[i].GetX() - 50) &&
+					(mPlayer->GetX() - 15) <= (mHorzWall[i].GetX() + 50))
 				{
 					hitHorzWall = true;
 					horzWall = i;
@@ -197,22 +282,22 @@ void Application2D::update(float deltaTime) {
 		
 		if (hitVertWall == true)
 		{
-			if (mPlayer->GetX() <= mVerticalWall[vertWall].GetX())
+			if (mPlayer->GetX() <= mVertWall[vertWall].GetX())
 			{
 				facingVertWall = 1;		//Can't move RIGHT
 				mPlayer->ChangePos(Vector2(-1, 0));
 			}
-			else if (mPlayer->GetX() >= mVerticalWall[vertWall].GetX())
+			else if (mPlayer->GetX() >= mVertWall[vertWall].GetX())
 			{
 				facingVertWall = 2;		//Can't move LEFT
 				mPlayer->ChangePos(Vector2(1, 0));
 			}
-			if ((mPlayer->GetY() + 15) == (mVerticalWall[vertWall].GetY() + 50))
+			if ((mPlayer->GetY() + 15) == (mVertWall[vertWall].GetY() + 50))
 			{
 				facingVertWallCorner = 3;		//Can't move UP
 				mPlayer->ChangePos(Vector2(0, -1));
 			}
-			else if ((mPlayer->GetY() + 15) == (mVerticalWall[vertWall].GetY() - 50))
+			else if ((mPlayer->GetY() + 15) == (mVertWall[vertWall].GetY() - 50))
 			{
 				facingVertWallCorner = 4;		//Can't move DOWN
 				mPlayer->ChangePos(Vector2(0, 1));
@@ -221,49 +306,69 @@ void Application2D::update(float deltaTime) {
 
 		if (hitHorzWall == true)
 		{
-			if (mPlayer->GetY() <= mHorizontalWall[horzWall].GetY())
+			if (mPlayer->GetY() <= mHorzWall[horzWall].GetY())
 			{
 				facingHorzWall = 3;		//Can't move UP
 				mPlayer->ChangePos(Vector2(0, -1));
 			}
-			else if (mPlayer->GetY() >= mHorizontalWall[horzWall].GetY())
+			else if (mPlayer->GetY() >= mHorzWall[horzWall].GetY())
 			{
 				facingHorzWall = 4;		//Can't move DOWN
 				mPlayer->ChangePos(Vector2(0, 1));
 			}
-			if ((mPlayer->GetX() + 15) == (mHorizontalWall[horzWall].GetX() - 50))
+			if ((mPlayer->GetX() + 15) == (mHorzWall[horzWall].GetX() - 50))
 			{
 				facingHorzWallCorner = 1;		//Can't move RIGHT
 				mPlayer->ChangePos(Vector2(-1, 0));
 			}
-			else if ((mPlayer->GetX() - 15) == (mHorizontalWall[horzWall].GetX() + 50))
+			else if ((mPlayer->GetX() - 15) == (mHorzWall[horzWall].GetX() + 50))
 			{
 				facingHorzWallCorner = 2;		//Can't move LEFT
 				mPlayer->ChangePos(Vector2(1, 0));
 			}
 		}
-
-
+		
+	
 		aie::Input* input = aie::Input::getInstance();
-
 		if (input->isKeyDown(aie::INPUT_KEY_W) && facingHorzWall != 3 &&
 			facingVertWallCorner != 3)
+		{
 			mPlayer->ChangePos(Vector2(0, (200 * deltaTime)));
-
+			mPlayer->ChangeDirection(3);
+		}
 		if (input->isKeyDown(aie::INPUT_KEY_S) && facingHorzWall != 4 &&
 			facingVertWallCorner != 4)
+		{
 			mPlayer->ChangePos(Vector2(0, (-200 * deltaTime)));
-
+			mPlayer->ChangeDirection(4);
+		}
 		if (input->isKeyDown(aie::INPUT_KEY_A) && facingVertWall != 2 &&
 			facingHorzWallCorner != 2)
+		{
 			mPlayer->ChangePos(Vector2((-200 * deltaTime), 0));
-
+			mPlayer->ChangeDirection(2);
+		}
 		if (input->isKeyDown(aie::INPUT_KEY_D) && facingVertWall != 1 &&
 			facingHorzWallCorner != 1)
+		{
 			mPlayer->ChangePos(Vector2((200 * deltaTime), 0));
+			mPlayer->ChangeDirection(1);
+		}
+		if (input->isKeyDown(aie::INPUT_KEY_SPACE))
+		{
+			if(mPlayer->CheckProjectiles() == true)
+			{
+				for(int i = 0; i < 5; i++)
+				{
+					if(mProjectile[i].IsPickedUp() == true)
+					{
+						mProjectile[i].Activate();
+						break;
+					}
+				}
+			}
+		}
 
-		//if (input->isKeyDown(aie::INPUT_KEY_SPACE)
-		//	//SHOOT PROJECTILE
 
 		// exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -318,6 +423,7 @@ void Application2D::draw() {
 	//Enemies
 	for (int i = 0; i < 3; i++)
 	{
+	if(mEnemy[i].Status() != true)
 		m_2dRenderer->setRenderColour(1, 0, 0, 1);
 		m_2dRenderer->drawCircle(mEnemy[i].GetX(), mEnemy[i].GetY(), 10);
 	}
@@ -331,6 +437,26 @@ void Application2D::draw() {
 			m_2dRenderer->drawCircle(mPellet[i].GetX(), mPellet[i].GetY(), 5);
 		}
 	}
+
+	//Power Pellets
+	for (int i = 0; i < 10; i++)
+	{
+		if (mPowerPellet[i].Status() != true)
+		{
+			m_2dRenderer->setRenderColour(1, 0, 1, 1);
+			m_2dRenderer->drawCircle(mPowerPellet[i].GetX(), mPowerPellet[i].GetY(), 8);
+		}
+	}
+
+	//Projectile
+	for (int i = 0; i < 10; i++)
+	{
+		if (mProjectile[i].IsActive() != false)
+		{
+			m_2dRenderer->setRenderColour(1, 0, 1, 1);
+			m_2dRenderer->drawCircle(mProjectile[i].GetX(), mProjectile[i].GetY(), 8);
+		}
+	}
 	
 	//Boundary Walls		width: 10  ,  height: 100
 		m_2dRenderer->setRenderColour(0, 0, 1, 1);
@@ -342,13 +468,13 @@ void Application2D::draw() {
 	//Vertical Walls		width: 20  ,  height: 100
 		for (int i = 0; i < 10; i++)
 		{
-			m_2dRenderer->drawBox(mVerticalWall[i].GetX(), mVerticalWall[i].GetY(), 20, 100);
+			m_2dRenderer->drawBox(mVertWall[i].GetX(), mVertWall[i].GetY(), 20, 100);
 		}
 
 	//Horizontal Walls		width: 100  , height: 20
 		for (int i = 0; i < 10; i++)
 		{
-			m_2dRenderer->drawBox(mHorizontalWall[i].GetX(), mHorizontalWall[i].GetY(), 100, 20);
+			m_2dRenderer->drawBox(mHorzWall[i].GetX(), mHorzWall[i].GetY(), 100, 20);
 		}
 	
 	// //output some text, uses the last used colour

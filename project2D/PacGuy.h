@@ -9,6 +9,7 @@ private:
 	int mLives;
 	int mProjectiles;
 	int mPellets;
+	int mFacing; //1 is right, 2 is left, 3 is up, 4 is down
 public:
 	PacGuy();
 	bool CheckLives();
@@ -22,7 +23,10 @@ public:
 	void ChangePos(Vector2 &other);
 	Vector2 GetPos();
 	void AddProjectile();
+	void SubtractProjectile();
 	void LoseALife();
 	void PickUpPellet();
 	int NumPellets();
+	int Facing();
+	void ChangeDirection(int dir);
 };

@@ -4,6 +4,8 @@ Enemy::Enemy()
 {
 	mPosition = new Vector2();
 	mVelocity = new Vector2();
+	mSpeed = 0;
+	mIsDead = false;
 }
 
 void Enemy::SetPosition(int x, int y, Vector2 velo, int speed)
@@ -68,4 +70,9 @@ void Enemy::ChangeVelocity(Vector2 velo)
 Vector2 Enemy::GetVelocity()
 {
 	return *mVelocity;
+}
+
+bool Enemy::Status()
+{
+	return mIsDead;
 }

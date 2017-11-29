@@ -2,7 +2,7 @@
 
 Item::Item()
 {
-	mPosition = new Vector2;
+	mPosition = new Vector2();
 	mPickedUp = false;
 }
 

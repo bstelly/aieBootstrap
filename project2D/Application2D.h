@@ -6,6 +6,7 @@
 #include "Wall.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "Projectile.h"
 
 class Application2D : public aie::Application {
 public:
@@ -30,9 +31,10 @@ protected:
 	float mPx;
 	float mPy;
 	PacGuy* mPlayer;
-	Wall* mVerticalWall;
-	Wall* mHorizontalWall;
+	Wall* mVertWall;
+	Wall* mHorzWall;
 	Enemy* mEnemy;
 	Item* mPellet;
 	Item* mPowerPellet;
+	Projectile* mProjectile;
 };
