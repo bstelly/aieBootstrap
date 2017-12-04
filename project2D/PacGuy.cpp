@@ -1,7 +1,7 @@
 #include "PacGuy.h"
 
 PacGuy::PacGuy()
-{	
+{
 	mPosition = new Vector2(0, 0);
 	mLives = 3;
 	mProjectiles = 0;
@@ -70,7 +70,7 @@ void PacGuy::ChangePos(Vector2 &other)
 }
 
 Vector2 PacGuy::GetPos()
-{	
+{
 	Vector2* temp = new Vector2;
 	temp->mX = mPosition->mX;
 	temp->mY = mPosition->mY;

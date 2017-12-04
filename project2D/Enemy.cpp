@@ -76,3 +76,8 @@ bool Enemy::Status()
 {
 	return mIsDead;
 }
+
+void Enemy::EnemyHasDied()
+{
+	mIsDead = true;
+}

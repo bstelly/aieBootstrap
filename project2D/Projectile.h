@@ -9,14 +9,20 @@ private:
 	int mSpeed;
 	bool mActive;
 	bool mPickedUp;
-public:
+	int mFacing;
+	bool mIsDirectionSet;
+	public:
 	Projectile();
 	void SetPosition(int y, int x);
 	int GetX();
 	int GetY();
-	void Move(int direction);
+	void Move();
 	void HasBeenPickedUp();
 	bool IsActive();
 	bool IsPickedUp();
 	void Activate();
+	bool DirectionStatus();
+	void SetDirectionFacing(int dir);
+	void ChangeDirectionStatus();
+	void Deactivate();
 };

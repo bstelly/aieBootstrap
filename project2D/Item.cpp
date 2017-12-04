@@ -11,6 +11,7 @@ void Item::SetPosition(int x, int y)
 	Vector2 position(x, y);
 	*mPosition = position;
 	mPickedUp = false;
+	mUsed = false;
 }
 
 Vector2 Item::GetPosition()
@@ -33,7 +34,17 @@ void Item::HasBeenPickedUp()
 	mPickedUp = true;
 }
 
-bool Item::Status()
+void Item::HasBeenFired()
+{
+	mUsed = true;
+}
+
+bool Item::PickedUpStatus()
 {
 	return mPickedUp;
+}
+
+bool Item::FiredStatus()
+{
+	return mUsed;
 }
