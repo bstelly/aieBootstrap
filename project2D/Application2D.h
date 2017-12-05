@@ -19,6 +19,7 @@ public:
 
 	virtual void update(float deltaTime);
 	virtual void draw();
+	void StartUpObjects();
 
 protected:
 
