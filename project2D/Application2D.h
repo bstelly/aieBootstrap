@@ -19,6 +19,13 @@ public:
 
 	virtual void update(float deltaTime);
 	virtual void draw();
+	
+	//Prototype : void StartUpObjects();
+	//Arguments : none
+	//Description : creates all of the objects in the game
+	//Precondition : The application start-up function must be executed
+	//Postcondition : The game now has objects
+	//Protection Level : public
 	void StartUpObjects();
 
 protected:

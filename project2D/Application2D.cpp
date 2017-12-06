@@ -111,7 +111,7 @@ void Application2D::update(float deltaTime) {
 
 
 	//Check if projectile hits enemy
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		for (int iter = 0; iter < 10; iter++)
 		{
@@ -133,7 +133,7 @@ void Application2D::update(float deltaTime) {
 
 
 	//Check if projectile hits wall
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
@@ -150,7 +150,7 @@ void Application2D::update(float deltaTime) {
 
 
 		//Update Projectile starting position
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			if (mProjectile[i].IsActive() == false)
 			{
@@ -166,7 +166,7 @@ void Application2D::update(float deltaTime) {
 
 
 		//Projectile Movement
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			if (mProjectile[i].DirectionStatus() == true)
 			{
@@ -185,7 +185,7 @@ void Application2D::update(float deltaTime) {
 		}
 
 		//Check if player hits a pellet
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 300; i++)
 		{
 			if ((mPellet[i].GetX() + 5) >= playerLeftSide &&
 				(mPellet[i].GetX() - 5) <= playerRightSide)
@@ -207,7 +207,7 @@ void Application2D::update(float deltaTime) {
 		}
 
 		//Check if player hits a Power Pellet
-		for (int i = 0; i < 7; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			if ((mPowerPellet[i].GetX() + 8) >= playerLeftSide &&
 				(mPowerPellet[i].GetX() - 8) <= playerRightSide)
@@ -230,8 +230,8 @@ void Application2D::update(float deltaTime) {
 		}
 
 
-		//Win Condition
-		//if (mPlayer->NumPellets() == 2)
+		////Win Condition
+		//if (mPlayer->NumPellets() == 123)
 		//{
 		//	quit();
 		//}
@@ -340,25 +340,25 @@ void Application2D::update(float deltaTime) {
 		if (input->isKeyDown(aie::INPUT_KEY_W) && facingHorzWall != 3 &&
 			facingVertWallCorner != 3)
 		{
-			mPlayer->ChangePos(Vector2(0, (250 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (100 * deltaTime)));
 			mPlayer->ChangeDirection(3);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_S) && facingHorzWall != 4 &&
 			facingVertWallCorner != 4)
 		{
-			mPlayer->ChangePos(Vector2(0, (-250 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (-100 * deltaTime)));
 			mPlayer->ChangeDirection(4);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_A) && facingVertWall != 2 &&
 			facingHorzWallCorner != 2)
 		{
-			mPlayer->ChangePos(Vector2((-250 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((-100 * deltaTime), 0));
 			mPlayer->ChangeDirection(2);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_D) && facingVertWall != 1 &&
 			facingHorzWallCorner != 1)
 		{
-			mPlayer->ChangePos(Vector2((250 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((100 * deltaTime), 0));
 			mPlayer->ChangeDirection(1);
 		}
 		if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))
@@ -432,7 +432,7 @@ void Application2D::draw() {
 	m_2dRenderer->drawCircle(mPlayer->GetX(), mPlayer->GetY(), 15);
 
 	//Enemies
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		if (mEnemy[i].Status() != true)
 		{
@@ -443,7 +443,7 @@ void Application2D::draw() {
 
 	//Pellets
 	m_2dRenderer->setRenderColour(0, 1, 0, 1);
-	for (int i = 0; i < 200; i++)
+	for (int i = 0; i < 300; i++)
 	{
 		if (mPellet[i].PickedUpStatus() != true)
 		{
@@ -470,9 +470,6 @@ void Application2D::draw() {
 			m_2dRenderer->drawCircle(mProjectile[i].GetX(), mProjectile[i].GetY(), 8);
 		}
 	}
-
-
-	//m_2dRenderer->drawSprite(m_texture, 639, 360.5);
 
 	//Boundary Walls		width: 10  ,  height: 100
 		m_2dRenderer->setRenderColour(0, 0, 1, 1);
@@ -506,10 +503,10 @@ void Application2D::draw() {
 
 
 
-	//char fps[32];
-	//sprintf_s(fps, 32, "FPS: %i", getFPS());
-	//m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
-	//m_2dRenderer->drawText(m_font, "Press ESC to quit!", 0, 720 - 64);
+	char fps[32];
+	sprintf_s(fps, 32, "FPS: %i", getFPS());
+	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
+	m_2dRenderer->drawText(m_font, "Press ESC to quit!", 0, 720 - 64);
 
 	// done drawing sprites
 	m_2dRenderer->end();
@@ -602,7 +599,7 @@ void Application2D::StartUpObjects()
 	mHorzWall[22].SetPosition(380, 281);
 	mHorzWall[23].SetPosition(480, 281);
 	mHorzWall[24].SetPosition(573, 281);
-	mHorzWall[25].SetPosition(952, 317);
+	mHorzWall[25].SetPosition(988, 317);
 	mHorzWall[26].SetPosition(1052, 317);
 	mHorzWall[27].SetPosition(1152, 317);
 	mHorzWall[28].SetPosition(1252, 317);
@@ -763,18 +760,153 @@ void Application2D::StartUpObjects()
 	mPellet[117].SetPosition(500, 190);
 	mPellet[118].SetPosition(540, 190);
 	mPellet[119].SetPosition(580, 190);
+	mPellet[120].SetPosition(540, 150);
+	mPellet[121].SetPosition(580, 150);
+	mPellet[122].SetPosition(540, 110);
+	mPellet[123].SetPosition(580, 110);
+	mPellet[124].SetPosition(620, 110);
+	mPellet[125].SetPosition(620, 150);
+	mPellet[126].SetPosition(620, 190);
+	mPellet[127].SetPosition(660, 210);
+	mPellet[128].SetPosition(680, 180);
+	mPellet[129].SetPosition(680, 140);
+	mPellet[130].SetPosition(680, 100);
+	mPellet[131].SetPosition(660, 285);
+	mPellet[132].SetPosition(660, 325);
+	mPellet[133].SetPosition(620, 325);
+	mPellet[134].SetPosition(580, 325);
+	mPellet[135].SetPosition(570, 365);
+	mPellet[136].SetPosition(570, 405);
+	mPellet[137].SetPosition(570, 445);
+	mPellet[138].SetPosition(570, 485);
+	mPellet[139].SetPosition(570, 525);
+	mPellet[140].SetPosition(570, 565);
+	mPellet[141].SetPosition(515, 628);
+	mPellet[142].SetPosition(320, 628);
+	mPellet[143].SetPosition(353, 628);
+	mPellet[144].SetPosition(383, 628);
+	mPellet[145].SetPosition(416, 628);
+	mPellet[146].SetPosition(449, 628);
+	mPellet[147].SetPosition(482, 628);
+	mPellet[148].SetPosition(548, 628);
+	mPellet[149].SetPosition(320, 588);
+	mPellet[150].SetPosition(320, 548);
+	mPellet[151].SetPosition(320, 508);
+	mPellet[152].SetPosition(280, 508);
+	mPellet[153].SetPosition(240, 508);
+	mPellet[154].SetPosition(240, 548);
+	mPellet[160].SetPosition(200, 548);
+	mPellet[161].SetPosition(160, 548);
+	mPellet[162].SetPosition(120, 548);
+	mPellet[155].SetPosition(240, 588);
+	mPellet[163].SetPosition(200, 588);
+	mPellet[164].SetPosition(160, 588);
+	mPellet[165].SetPosition(120, 588);
+	mPellet[156].SetPosition(240, 628);
+	mPellet[166].SetPosition(200, 628);
+	mPellet[167].SetPosition(160, 628);
+	mPellet[168].SetPosition(120, 628);
+	mPellet[169].SetPosition(70, 628);
+	mPellet[170].SetPosition(30, 628);
+	mPellet[171].SetPosition(70, 588);
+	mPellet[172].SetPosition(70, 548);
+	mPellet[173].SetPosition(70, 508);
+	mPellet[174].SetPosition(70, 468);
+	mPellet[175].SetPosition(70, 428);
+	mPellet[176].SetPosition(70, 388);
+	mPellet[177].SetPosition(70, 348);
+	mPellet[179].SetPosition(30, 588);
+	mPellet[180].SetPosition(30, 548);
+	mPellet[181].SetPosition(30, 508);
+	mPellet[182].SetPosition(30, 468);
+	mPellet[183].SetPosition(30, 428);
+	mPellet[184].SetPosition(30, 388);
+	mPellet[185].SetPosition(30, 348);
+	mPellet[157].SetPosition(508, 508);
+	mPellet[158].SetPosition(508, 468);
+	mPellet[159].SetPosition(508, 428);
+	mPellet[186].SetPosition(540, 445);
+	mPellet[187].SetPosition(540, 405);
+	mPellet[188].SetPosition(508, 388);
+	mPellet[189].SetPosition(508, 348);
+	mPellet[194].SetPosition(468, 348);
+	mPellet[195].SetPosition(468, 388);
+	mPellet[196].SetPosition(428, 388);
+	mPellet[197].SetPosition(388, 388);
+	mPellet[198].SetPosition(388, 428);
+	mPellet[199].SetPosition(428, 428);
+	mPellet[200].SetPosition(428, 468);
+	mPellet[201].SetPosition(428, 508);
+	mPellet[202].SetPosition(388, 508);
+	mPellet[203].SetPosition(388, 548);
+	mPellet[204].SetPosition(388, 588);
+	mPellet[205].SetPosition(428, 588);
+	mPellet[206].SetPosition(468, 588);
+	mPellet[207].SetPosition(508, 568);
+	mPellet[190].SetPosition(508, 308);
+	mPellet[191].SetPosition(468, 308);
+	mPellet[192].SetPosition(428, 308);
+	mPellet[193].SetPosition(388, 308);
+	mPellet[208].SetPosition(30, 98);
+	mPellet[209].SetPosition(70, 98);
+	mPellet[210].SetPosition(110, 98);
+	mPellet[211].SetPosition(30, 148);
+	mPellet[212].SetPosition(70, 148);
+	mPellet[213].SetPosition(110, 148);
+	mPellet[214].SetPosition(110, 205);
+	mPellet[215].SetPosition(70, 205);
+	mPellet[216].SetPosition(30, 205);
+	mPellet[217].SetPosition(30, 260);
+	mPellet[218].SetPosition(70, 260);
+	mPellet[219].SetPosition(110, 260);
+	mPellet[220].SetPosition(120, 300);
+	mPellet[221].SetPosition(120, 340);
+	mPellet[222].SetPosition(120, 380);
+	mPellet[223].SetPosition(120, 420);
+	mPellet[224].SetPosition(120, 460);
+	mPellet[225].SetPosition(100, 485);
+	mPellet[226].SetPosition(140, 485);
+	mPellet[227].SetPosition(180, 485);
+	mPellet[228].SetPosition(180, 445);
+	mPellet[229].SetPosition(180, 405);
+	mPellet[230].SetPosition(220, 405);
+	mPellet[231].SetPosition(260, 405);
+	mPellet[232].SetPosition(300, 405);
+	mPellet[233].SetPosition(300, 445);
+	mPellet[234].SetPosition(260, 445);
+	mPellet[235].SetPosition(260, 485);
 
-	mPellet[120].SetPosition(500, 100);
+	mPellet[236].SetPosition(30, 685);
+	mPellet[237].SetPosition(70, 685);
+	mPellet[238].SetPosition(110, 685);
+	mPellet[239].SetPosition(150, 685);
+	mPellet[240].SetPosition(190, 685);
+	mPellet[241].SetPosition(230, 685);
+	mPellet[242].SetPosition(270, 685);
+	mPellet[243].SetPosition(310, 685);
+	mPellet[244].SetPosition(350, 685);
+	mPellet[245].SetPosition(390, 685);
+	mPellet[246].SetPosition(430, 685);
+	mPellet[247].SetPosition(470, 685);
+	mPellet[248].SetPosition(510, 685);
+	mPellet[249].SetPosition(550, 685);
+	mPellet[250].SetPosition(590, 685);
+	mPellet[251].SetPosition(630, 685);
+	mPellet[252].SetPosition(670, 685);
+	mPellet[253].SetPosition(710, 685);
+	mPellet[254].SetPosition(750, 685);
+	mPellet[255].SetPosition(790, 685);
+	mPellet[256].SetPosition(830, 685);
 
 
 	////Power Pellets
 	mPowerPellet[0].SetPosition(620, 45);
 	mPowerPellet[1].SetPosition(1220, 125);
 	mPowerPellet[2].SetPosition(240, 113);
-	//mPowerPellet[3].SetPosition(600, 450);
-	//mPowerPellet[4].SetPosition(620, 450);
-	//mPowerPellet[5].SetPosition(635, 450);
-	//mPowerPellet[6].SetPosition(650, 450);
+	mPowerPellet[3].SetPosition(570, 628);
+	mPowerPellet[4].SetPosition(360, 308);
+	mPowerPellet[5].SetPosition(800, 523);
+	mPowerPellet[6].SetPosition(50, 318);
 
 	////Projectiles
 	mProjectile[0].SetPosition(mPlayer->GetX(), mPlayer->GetY());
