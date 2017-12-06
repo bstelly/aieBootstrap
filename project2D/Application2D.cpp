@@ -48,7 +48,7 @@ void Application2D::update(float deltaTime) {
 
 
 	//Enemy movement
-	for (int iter = 0; iter < 3; iter++)
+	for (int iter = 0; iter < 10; iter++)
 	{
 		mEnemy[iter].Move();
 	}
@@ -340,25 +340,25 @@ void Application2D::update(float deltaTime) {
 		if (input->isKeyDown(aie::INPUT_KEY_W) && facingHorzWall != 3 &&
 			facingVertWallCorner != 3)
 		{
-			mPlayer->ChangePos(Vector2(0, (100 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (50 * deltaTime)));
 			mPlayer->ChangeDirection(3);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_S) && facingHorzWall != 4 &&
 			facingVertWallCorner != 4)
 		{
-			mPlayer->ChangePos(Vector2(0, (-100 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (-50 * deltaTime)));
 			mPlayer->ChangeDirection(4);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_A) && facingVertWall != 2 &&
 			facingHorzWallCorner != 2)
 		{
-			mPlayer->ChangePos(Vector2((-100 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((-50 * deltaTime), 0));
 			mPlayer->ChangeDirection(2);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_D) && facingVertWall != 1 &&
 			facingHorzWallCorner != 1)
 		{
-			mPlayer->ChangePos(Vector2((100 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((50 * deltaTime), 0));
 			mPlayer->ChangeDirection(1);
 		}
 		if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))
@@ -405,7 +405,7 @@ void Application2D::update(float deltaTime) {
 		for (int i = 0; i < 10; i++)
 		{
 			if (mEnemy[i].GetX() > 1280 - 25 || (mEnemy[i].GetX() - 25) < 0 ||
-				mEnemy[i].GetY() > 720 - 25 || (mEnemy[i].GetY() - 35) < 0)
+				mEnemy[i].GetY() > (720 - 25) || (mEnemy[i].GetY() - 35) < 0)
 			{
 				mEnemy[i].ChangeVelocity(mEnemy[i].GetVelocity() * -1.0f);
 			}
@@ -443,7 +443,7 @@ void Application2D::draw() {
 
 	//Pellets
 	m_2dRenderer->setRenderColour(0, 1, 0, 1);
-	for (int i = 0; i < 300; i++)
+	for (int i = 0; i < 400; i++)
 	{
 		if (mPellet[i].PickedUpStatus() != true)
 		{
@@ -635,7 +635,7 @@ void Application2D::StartUpObjects()
 	mHorzWall[58].SetPosition(1173, 659);
 
 	////Enemies
-	//mEnemy[0].SetPosition(400, 400, Vector2(1, 0), 15);
+	mEnemy[0].SetPosition(180, 200, Vector2(0, 1), 1);
 	//mEnemy[1].SetPosition(300, 300, Vector2(-1, 0), 10);
 	//mEnemy[2].SetPosition(400, 400, Vector2(0, 1), 5)
 
@@ -849,7 +849,7 @@ void Application2D::StartUpObjects()
 	mPellet[193].SetPosition(388, 308);
 	mPellet[208].SetPosition(30, 98);
 	mPellet[209].SetPosition(70, 98);
-	mPellet[210].SetPosition(110, 98);
+	mPellet[210].SetPosition(1110, 588);
 	mPellet[211].SetPosition(30, 148);
 	mPellet[212].SetPosition(70, 148);
 	mPellet[213].SetPosition(110, 148);
@@ -875,7 +875,6 @@ void Application2D::StartUpObjects()
 	mPellet[233].SetPosition(300, 445);
 	mPellet[234].SetPosition(260, 445);
 	mPellet[235].SetPosition(260, 485);
-
 	mPellet[236].SetPosition(30, 685);
 	mPellet[237].SetPosition(70, 685);
 	mPellet[238].SetPosition(110, 685);
@@ -897,6 +896,126 @@ void Application2D::StartUpObjects()
 	mPellet[254].SetPosition(750, 685);
 	mPellet[255].SetPosition(790, 685);
 	mPellet[256].SetPosition(830, 685);
+	mPellet[257].SetPosition(870, 685);
+	mPellet[258].SetPosition(910, 685);
+	mPellet[259].SetPosition(950, 685);
+	mPellet[260].SetPosition(990, 685);
+	mPellet[261].SetPosition(1030, 685);
+	mPellet[262].SetPosition(1070, 685);
+	mPellet[263].SetPosition(1110, 685);
+	mPellet[264].SetPosition(1150, 685);
+	mPellet[265].SetPosition(1190, 685);
+	mPellet[266].SetPosition(1230, 685);
+	mPellet[267].SetPosition(1245, 645);
+	mPellet[268].SetPosition(1245, 605);
+	mPellet[269].SetPosition(1245, 565);
+	mPellet[270].SetPosition(1245, 525);
+	mPellet[271].SetPosition(1245, 485);
+	mPellet[272].SetPosition(1245, 445);
+	mPellet[273].SetPosition(1205, 348);
+	mPellet[274].SetPosition(1185, 388);
+	mPellet[275].SetPosition(1185, 428);
+	mPellet[276].SetPosition(1185, 468);
+	mPellet[277].SetPosition(1185, 508);
+	mPellet[278].SetPosition(1185, 548);
+	mPellet[279].SetPosition(1185, 588);
+	mPellet[280].SetPosition(1185, 628);
+	mPellet[281].SetPosition(1145, 628);
+	mPellet[282].SetPosition(1110, 628);
+	mPellet[283].SetPosition(1145, 588);
+	mPellet[284].SetPosition(1145, 508);
+	mPellet[285].SetPosition(1125, 468);
+	mPellet[286].SetPosition(1125, 428);
+	mPellet[287].SetPosition(1095, 408);
+	mPellet[288].SetPosition(1055, 408);
+	mPellet[289].SetPosition(1015, 408);
+	mPellet[290].SetPosition(1055, 408);
+	mPellet[291].SetPosition(1055, 448);
+	mPellet[292].SetPosition(1055, 488);
+	mPellet[293].SetPosition(1015, 408);
+	mPellet[294].SetPosition(1015, 448);
+	mPellet[295].SetPosition(1015, 488);
+	mPellet[296].SetPosition(1015, 528);
+	mPellet[297].SetPosition(1015, 568);
+	mPellet[298].SetPosition(1015, 608);
+	mPellet[299].SetPosition(1055, 568);
+	mPellet[300].SetPosition(1055, 608);
+
+	mPellet[301].SetPosition(1035, 628);
+	mPellet[302].SetPosition(995, 628);
+	mPellet[303].SetPosition(955, 628);
+	mPellet[304].SetPosition(915, 628);
+	mPellet[305].SetPosition(875, 628);
+	mPellet[306].SetPosition(835, 628);
+	mPellet[307].SetPosition(795, 628);
+	mPellet[308].SetPosition(755, 628);
+	mPellet[309].SetPosition(715, 628);
+	
+	mPellet[310].SetPosition(675, 628);
+	mPellet[311].SetPosition(635, 628);
+	mPellet[312].SetPosition(635, 588);
+	mPellet[313].SetPosition(675, 588);
+	mPellet[314].SetPosition(715, 588);
+	mPellet[315].SetPosition(795, 588);
+	mPellet[316].SetPosition(835, 588);
+	mPellet[317].SetPosition(875, 588);
+	mPellet[318].SetPosition(915, 588);
+	mPellet[319].SetPosition(955, 588);
+	
+	mPellet[320].SetPosition(955, 548);
+	mPellet[321].SetPosition(955, 508);
+	mPellet[322].SetPosition(955, 468);
+	mPellet[323].SetPosition(955, 428);
+	mPellet[324].SetPosition(955, 388);
+	mPellet[325].SetPosition(955, 348);
+	mPellet[326].SetPosition(995, 348);
+	mPellet[327].SetPosition(1035, 348);
+	mPellet[328].SetPosition(1075, 348);
+	mPellet[329].SetPosition(1115, 348);
+	mPellet[330].SetPosition(840, 523);
+	mPellet[331].SetPosition(880, 523);
+	mPellet[332].SetPosition(895, 483);
+	mPellet[333].SetPosition(895, 443);
+	mPellet[334].SetPosition(895, 403);
+	mPellet[335].SetPosition(895, 363);
+	mPellet[336].SetPosition(895, 323);
+	
+	mPellet[337].SetPosition(855, 325);
+	mPellet[338].SetPosition(815, 325);
+	mPellet[339].SetPosition(775, 325);
+	mPellet[340].SetPosition(735, 325);
+	mPellet[341].SetPosition(695, 325);
+	mPellet[342].SetPosition(730, 523);
+	mPellet[343].SetPosition(690, 523);
+	mPellet[344].SetPosition(650, 523);
+	mPellet[345].SetPosition(635, 483);
+	mPellet[346].SetPosition(635, 443);
+	mPellet[347].SetPosition(635, 403);
+	mPellet[348].SetPosition(635, 363);
+	mPellet[349].SetPosition(695, 420);
+	mPellet[351].SetPosition(695, 380);
+	mPellet[352].SetPosition(695, 460);
+	mPellet[350].SetPosition(735, 460);
+	mPellet[353].SetPosition(735, 420);
+	mPellet[354].SetPosition(735, 380);
+	mPellet[355].SetPosition(795, 380);
+	mPellet[356].SetPosition(795, 420);
+	mPellet[357].SetPosition(795, 460);
+	mPellet[358].SetPosition(835, 380);
+	mPellet[359].SetPosition(835, 420);
+	mPellet[360].SetPosition(835, 460);
+
+	mPellet[361].SetPosition(960, 95);
+
+	mPellet[362].SetPosition(920, 95);
+	mPellet[363].SetPosition(880, 95);
+	mPellet[364].SetPosition(840, 95);
+	mPellet[365].SetPosition(800, 95);
+	mPellet[366].SetPosition(760, 95);
+	mPellet[367].SetPosition(1000, 95);
+	mPellet[368].SetPosition(745, 220);
+	mPellet[369].SetPosition(745, 260);
+	mPellet[370].SetPosition(745, 300);
 
 
 	////Power Pellets
@@ -907,6 +1026,10 @@ void Application2D::StartUpObjects()
 	mPowerPellet[4].SetPosition(360, 308);
 	mPowerPellet[5].SetPosition(800, 523);
 	mPowerPellet[6].SetPosition(50, 318);
+	mPowerPellet[7].SetPosition(1245, 405);
+	mPowerPellet[8].SetPosition(1245, 348);
+	mPowerPellet[9].SetPosition(110, 98);
+
 
 	////Projectiles
 	mProjectile[0].SetPosition(mPlayer->GetX(), mPlayer->GetY());
