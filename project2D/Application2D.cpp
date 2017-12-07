@@ -31,6 +31,7 @@ bool Application2D::startup() {
 	mPowerPellet = new Item[10];
 	mProjectile = new Projectile[10];
 
+
 	StartUpObjects();
 	return true;
 }
@@ -44,6 +45,9 @@ void Application2D::shutdown() {
 
 void Application2D::update(float deltaTime) {
 	m_timer += deltaTime;
+
+
+
 
 	//Enemy movement
 	for (int iter = 0; iter < 10; iter++)
@@ -346,25 +350,25 @@ void Application2D::update(float deltaTime) {
 		if (input->isKeyDown(aie::INPUT_KEY_W) && facingHorzWall != 3 &&
 			facingVertWallCorner != 3)
 		{
-			mPlayer->ChangePos(Vector2(0, (50 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (30 * deltaTime)));
 			mPlayer->ChangeDirection(3);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_S) && facingHorzWall != 4 &&
 			facingVertWallCorner != 4)
 		{
-			mPlayer->ChangePos(Vector2(0, (-50 * deltaTime)));
+			mPlayer->ChangePos(Vector2(0, (-30 * deltaTime)));
 			mPlayer->ChangeDirection(4);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_A) && facingVertWall != 2 &&
 			facingHorzWallCorner != 2)
 		{
-			mPlayer->ChangePos(Vector2((-50 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((-30 * deltaTime), 0));
 			mPlayer->ChangeDirection(2);
 		}
 		if (input->isKeyDown(aie::INPUT_KEY_D) && facingVertWall != 1 &&
 			facingHorzWallCorner != 1)
 		{
-			mPlayer->ChangePos(Vector2((50 * deltaTime), 0));
+			mPlayer->ChangePos(Vector2((30 * deltaTime), 0));
 			mPlayer->ChangeDirection(1);
 		}
 		if (input->wasKeyPressed(aie::INPUT_KEY_SPACE))
@@ -503,10 +507,7 @@ void Application2D::draw() {
 	sprintf_s(projectiles, 20, "Projectiles: %i", projectilesLeft);
 	m_2dRenderer->drawText(m_font, projectiles, 1000, 6);
 
-	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
-	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
-	m_2dRenderer->drawText(m_font, "Press ESC to quit!", 0, 720 - 64);
+
 
 	// done drawing sprites
 	m_2dRenderer->end();
@@ -635,13 +636,13 @@ void Application2D::StartUpObjects()
 	mHorzWall[58].SetPosition(1173, 659);
 
 	////Enemies
-	mEnemy[0].SetPosition(180, 200, Vector2(0, 1), 0);
-	mEnemy[1].SetPosition(440, 192, Vector2(1, 0), 0);
-	mEnemy[2].SetPosition(440, 200, Vector2(0, -1), 0);
-	mEnemy[3].SetPosition(50, 350, Vector2(0, 1), 0);
-	mEnemy[4].SetPosition(590, 685, Vector2(-1, 0), 0);
-	mEnemy[5].SetPosition(670, 685, Vector2(1, 0), 0);
-	mEnemy[6].SetPosition(570, 628, Vector2(1, 0), 0);
+	mEnemy[0].SetPosition(180, 200, Vector2(0, 1), 1);
+	mEnemy[1].SetPosition(440, 192, Vector2(1, 0), 1);
+	mEnemy[2].SetPosition(440, 200, Vector2(0, -1), 1);
+	mEnemy[3].SetPosition(50, 350, Vector2(0, 1), 1);
+	mEnemy[4].SetPosition(590, 685, Vector2(-1, 0), 1);
+	mEnemy[5].SetPosition(670, 685, Vector2(1, 0), 1);
+	mEnemy[6].SetPosition(570, 628, Vector2(1, 0), 1);
 	mEnemy[7].SetPosition(760, 385, Vector2(-1, 0), 1);
 	mEnemy[8].SetPosition(955, 385, Vector2(0, -1), 1);
 	mEnemy[9].SetPosition(920, 45, Vector2(1, 0), 2);
