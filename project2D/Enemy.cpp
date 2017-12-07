@@ -32,30 +32,6 @@ void Enemy::ChangePos(Vector2 &other)
 	mPosition->mY += (mPosition->mY + other.mY);
 }
 
-void Enemy::SetX(float x)
-{
-	mPosition->mX = x;
-}
-
-void Enemy::SetY(float y)
-{
-	mPosition->mY = y;
-}
-
-Vector2 Enemy::GetPos()
-{
-	return *mPosition;
-}
-
-void Enemy::ChangeX(int x)
-{
-	mPosition->mX = x;
-}
-
-void Enemy::ChangeY(int y)
-{
-	mPosition->mY = y;
-}
 
 void Enemy::Move()
 {

@@ -10,123 +10,83 @@ private:
 	bool mIsDead;
 
 public:
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : Enemy()
+	//Arguments : none
+	//Description : Creates a default instance of the enemy class
+	//Precondition : none
+	//Postcondition : An instance of the enemy class is created
+	//Protection Level : public
 	Enemy();
 
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : void SetPosition(int x, int y, Vector2 velo, int speed);
+	//Arguments : three intetergers and a Vector2
+	//Description : Sets the position of an enemy object
+	//Precondition : There must be an instance of the enemy class
+	//Postcondition : An object of type enemy has a set position
+	//Protection Level : public
 	void SetPosition(int x, int y, Vector2 velo, int speed);
 
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : float GetX()
+	//Arguments : none
+	//Description : returns the 'x' value of an object of type enemy
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : an object of type enemy's x value is returned
+	//Protection Level : public
 	float GetX();
 
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : float GetY()
+	//Arguments : none
+	//Description : returns the 'y' value of an object of type enemy
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : an object of type enemy's y value is returned
+	//Protection Level : public
 	float GetY();
 
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : void ChangePos(Vector2 &other)
+	//Arguments : A Vector2
+	//Description : Changes the position of an enemy object
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : An object of type enemy has a changed position
+	//Protection Level : public
 	void ChangePos(Vector2 &other);
-
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
-	void SetX(float x);
-
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
-	void SetY(float Y);
 	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
-	void ChangeX(int x);
-	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
-	void ChangeY(int y);
-	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
-	Vector2 GetPos();
-	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
+	//Prototype : void ChangeVelocity(Vector2 velo)
+	//Arguments : a Vector2
+	//Description : Changes the velocity of an object of type enemy
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : An object of type enemy has a new velocity
 	//Protection Level : 
 	void ChangeVelocity(Vector2 velo);
 	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : void Move()
+	//Arguments : none
+	//Description : moves an object of type enemy to a new position
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : an object of type enemy has a new position
+	//Protection Level : public
 	void Move();
 	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : Vector2 GetVelocity();
+	//Arguments : none
+	//Description : Returns a Vector2
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : A Vector2 is returned
+	//Protection Level : public
 	Vector2 GetVelocity();
 	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : bool Status();
+	//Arguments : none
+	//Description : returns a boolean
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : true or false is returned
+	//Protection Level : public
 	bool Status();
 	
-	//Prototype :
-	//Arguments : 
-	//Description : 
-	//Precondition : 
-	//Postcondition : 
-	//Protection Level : 
+	//Prototype : void EnemyHasDied();
+	//Arguments : none
+	//Description : changes the the value of mIsDead for an enemy object
+	//Precondition : there must be an instance of the enemy class
+	//Postcondition : an enemy object's mIsDead member variable is now true
+	//Protection Level : public
 	void EnemyHasDied();
 };
