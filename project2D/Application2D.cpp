@@ -184,10 +184,7 @@ void Application2D::update(float deltaTime) {
 			{
 				mProjectile[i].Move();
 			}
-			else
-			{
-				break;
-			}
+
 		}
 
 		//Lose Condition
