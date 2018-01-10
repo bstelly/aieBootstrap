@@ -11,7 +11,7 @@ private:
 	bool mPickedUp;
 	int mFacing;
 	bool mIsDirectionSet;
-	
+
 public:
 	//Prototype : Projectile()
 	//Arguments : none
@@ -20,15 +20,15 @@ public:
 	//Postcondition : an instance of the projectile class is created
 	//Protection Level : public
 	Projectile();
-	
+
 	//Prototype : void SetPosition(int y, int x)
 	//Arguments : two intergers
 	//Description : Sets the position of an object of type projectile
 	//Precondition : there must be an instace of the Projectile class
-	//Postcondition : 
-	//Protection Level : 
+	//Postcondition :
+	//Protection Level :
 	void SetPosition(int y, int x);
-	
+
 	//Prototype : int GetX()
 	//Arguments : none
 	//Description : returns the x value of an object of type Projectile
