@@ -5,7 +5,7 @@ Projectile::Projectile()
 {
 	mPosition = new Vector2();
 	mVelocity = new Vector2();
-	mSpeed = 20;
+	mSpeed = 1;
 	mActive = false;
 	mPickedUp = false;
 	mFacing;

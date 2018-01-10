@@ -256,7 +256,7 @@ void Application2D::update(float deltaTime) {
 		bool hitHorzWall;
 
 		//Check for vertical wall for player
-		for (int i = 0; i < 54; i++)
+		for (int i = 0; i < 56; i++)
 		{
 			if ((mPlayer->GetX() + 25) >= mVertWall[i].GetX() &&
 				(mPlayer->GetX() - 25) <= mVertWall[i].GetX())
@@ -276,7 +276,7 @@ void Application2D::update(float deltaTime) {
 		}
 
 		//Checks for Horizontal Wall for player
-		for (int i = 0; i < 57; i++)
+		for (int i = 0; i < 59; i++)
 		{
 			if ((mPlayer->GetY() + 15) >= (mHorzWall[i].GetY() - 10) &&
 				(mPlayer->GetY() - 15) <= (mHorzWall[i].GetY() + 10))
@@ -482,13 +482,13 @@ void Application2D::draw() {
 		m_2dRenderer->drawBox(1280, 360, 30, 720);
 
 	//Vertical Walls		width: 20  ,  height: 100
-		for (int i = 0; i < 54; i++)
+		for (int i = 0; i < 56; i++)
 		{
 			m_2dRenderer->drawBox(mVertWall[i].GetX(), mVertWall[i].GetY(), 20, 100);
 		}
 
 	//Horizontal Walls		width: 100  , height: 20
-		for (int i = 0; i < 57; i++)
+		for (int i = 0; i < 59; i++)
 		{
 			m_2dRenderer->drawBox(mHorzWall[i].GetX(), mHorzWall[i].GetY(), 100, 20);
 		}
@@ -538,9 +538,9 @@ void Application2D::StartUpObjects()
 	mVertWall[23].SetPosition(150, 320);
 	mVertWall[24].SetPosition(150, 420);
 	mVertWall[23].SetPosition(93, 352);
-	mVertWall[24].SetPosition(93, 419);
+	mVertWall[24].SetPosition(93, 415);
 	mVertWall[25].SetPosition(150, 320);
-	mVertWall[26].SetPosition(150, 419);
+	mVertWall[26].SetPosition(150, 415);
 	mVertWall[27].SetPosition(94, 558);
 	mVertWall[28].SetPosition(211, 478);
 	mVertWall[29].SetPosition(281, 599);
@@ -633,16 +633,16 @@ void Application2D::StartUpObjects()
 	mHorzWall[58].SetPosition(1173, 659);
 
 	////Enemies
-	mEnemy[0].SetPosition(180, 200, Vector2(0, 1), 1);
-	mEnemy[1].SetPosition(440, 192, Vector2(1, 0), 1);
-	mEnemy[2].SetPosition(440, 200, Vector2(0, -1), 1);
-	mEnemy[3].SetPosition(50, 350, Vector2(0, 1), 1);
-	mEnemy[4].SetPosition(590, 685, Vector2(-1, 0), 1);
-	mEnemy[5].SetPosition(670, 685, Vector2(1, 0), 1);
-	mEnemy[6].SetPosition(570, 628, Vector2(1, 0), 1);
-	mEnemy[7].SetPosition(760, 385, Vector2(-1, 0), 1);
-	mEnemy[8].SetPosition(955, 385, Vector2(0, -1), 1);
-	mEnemy[9].SetPosition(920, 45, Vector2(1, 0), 2);
+	mEnemy[0].SetPosition(180, 200, Vector2(0, 1), 4);
+	mEnemy[1].SetPosition(440, 192, Vector2(1, 0), 4);
+	mEnemy[2].SetPosition(440, 200, Vector2(0, -1), 4);
+	mEnemy[3].SetPosition(50, 350, Vector2(0, 1), 4);
+	mEnemy[4].SetPosition(590, 685, Vector2(-1, 0), 4);
+	mEnemy[5].SetPosition(670, 685, Vector2(1, 0), 4);
+	mEnemy[6].SetPosition(570, 628, Vector2(1, 0), 4);
+	mEnemy[7].SetPosition(760, 385, Vector2(-1, 0), 4);
+	mEnemy[8].SetPosition(955, 385, Vector2(0, -1), 4);
+	mEnemy[9].SetPosition(920, 45, Vector2(1, 0), 4);
 
 	//Pellets
 	mPellet[0].SetPosition(60, 45);
