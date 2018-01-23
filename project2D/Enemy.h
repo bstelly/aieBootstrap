@@ -55,7 +55,7 @@ public:
 	//Description : Changes the velocity of an object of type enemy
 	//Precondition : there must be an instance of the enemy class
 	//Postcondition : An object of type enemy has a new velocity
-	//Protection Level : 
+	//Protection Level : public
 	void ChangeVelocity(Vector2 velo);
 	
 	//Prototype : void Move()

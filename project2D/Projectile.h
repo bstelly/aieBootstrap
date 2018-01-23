@@ -36,7 +36,7 @@ public:
 	//Postcondition : the x value is returned
 	//Protection Level : public
 	int GetX();
-	
+
 	//Prototype : int GetY()
 	//Arguments : none
 	//Description : returns the y value of an object of type Projectile
@@ -44,7 +44,7 @@ public:
 	//Postcondition : the y value is returned
 	//Protection Level : public
 	int GetY();
-	
+
 	//Prototype : void Move()
 	//Arguments : none
 	//Description : Changes the position of an object of tye Projectile
@@ -52,7 +52,7 @@ public:
 	//Postcondition : The position is changed
 	//Protection Level : public
 	void Move();
-	
+
 	//Prototype : void HasBeenPickedUp()
 	//Arguments : none
 	//Description : sets the value of mPickedUp to true
@@ -60,7 +60,7 @@ public:
 	//Postcondition : mPicked up is assigned true
 	//Protection Level : public
 	void HasBeenPickedUp();
-	
+
 	//Prototype : bool IsActive()
 	//Arguments : none
 	//Description : changes the value of mActive
@@ -68,7 +68,7 @@ public:
 	//Postcondition : mActive is assigned the opposite of its current value
 	//Protection Level : public
 	bool IsActive();
-	
+
 	//Prototype : bool IsPickedUp()
 	//Arguments : none
 	//Description : changes the value of mPickedUp to true
@@ -76,7 +76,7 @@ public:
 	//Postcondition : mPickedUp is assigned true
 	//Protection Level : public
 	bool IsPickedUp();
-	
+
 	//Prototype : void Activate()
 	//Arguments : none
 	//Description : sets the value of mActive to true
@@ -84,7 +84,7 @@ public:
 	//Postcondition : mActive is assigned true
 	//Protection Level : public
 	void Activate();
-	
+
 	//Prototype : bool DirectionStatus()
 	//Arguments : none
 	//Description : returns a boolean based on mIsDirectionSet
@@ -92,7 +92,7 @@ public:
 	//Postcondition : a boolean is returned
 	//Protection Level : public
 	bool DirectionStatus();
-	
+
 	//Prototype : void SetDirectionFacing(int dir)
 	//Arguments : an interger
 	//Description : changes the value of mFacing
@@ -100,7 +100,7 @@ public:
 	//Postcondition : mFacing is assigned a new interger
 	//Protection Level : public
 	void SetDirectionFacing(int dir);
-	
+
 	//Prototype : void ChangeDirectionStatus()
 	//Arguments : none
 	//Description : changes mIsDirectionSet to true
@@ -108,11 +108,11 @@ public:
 	//Postcondition : mIsDirectionSet is assigned true
 	//Protection Level : public
 	void ChangeDirectionStatus();
-	
+
 	//Prototype : void Deactivate()
 	//Arguments : none
 	//Description : Changes mActive to false
-	//Precondition : there must be an instace of the Projectile class
+	//Precondition : there must be an instance of the Projectile class
 	//Postcondition : mActive is assigned false
 	//Protection Level : public
 	void Deactivate();
