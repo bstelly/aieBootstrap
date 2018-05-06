@@ -18,7 +18,7 @@ Application2D::~Application2D() {
 bool Application2D::startup() {
 
 	m_2dRenderer = new aie::Renderer2D();
-	m_texture = new aie::Texture("./textures/maze.png");
+	m_texture = new aie::Texture("./textures/menu.png");
 	m_font = new aie::Font("./font/consolas.ttf", 25);
 	m_cameraX = 0;
 	m_cameraY = 0;
@@ -30,8 +30,7 @@ bool Application2D::startup() {
 	mPellet = new Item[380];
 	mPowerPellet = new Item[10];
 	mProjectile = new Projectile[10];
-
-
+	start = false;
 	StartUpObjects();
 	return true;
 }
@@ -44,8 +43,8 @@ void Application2D::shutdown() {
 }
 
 void Application2D::update(float deltaTime) {
-	m_timer += deltaTime;
-
+	m_timer += 2;
+	//MainMenu();
 
 
 
@@ -385,6 +384,10 @@ void Application2D::update(float deltaTime) {
 				}
 			}
 		}
+		if (input->isKeyDown(aie::INPUT_KEY_ENTER))
+		{
+			start = true;
+		}
 
 		// exit the application
 		if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
@@ -504,8 +507,9 @@ void Application2D::draw() {
 	sprintf_s(projectiles, 20, "Projectiles: %i", projectilesLeft);
 	m_2dRenderer->drawText(m_font, projectiles, 1000, 6);
 
-
-
+	if (start == false) {
+		m_2dRenderer->drawSprite(m_texture, 640, 360, 1280, 720);
+	}
 	// done drawing sprites
 	m_2dRenderer->end();
 }
